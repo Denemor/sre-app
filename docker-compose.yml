@@ -1,0 +1,21 @@
+version: '3.9'
+
+x-network:
+  default-network: &default-network sre-app
+
+networks:
+  *default-network:
+
+services:
+  sre-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: denemor/sre-app
+    ports:
+      - 8080:80
+    networks:
+      *default-network:
+        aliases:
+          - sre-app
+    restart: always
